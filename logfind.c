@@ -133,7 +133,8 @@ Grep_expand(Grep *grep) {
 
 		for (i = 0; i < word_buf.we_wordc; i++) {
 			grep->logfile_exp_list[grep->exp_cnt] = calloc(strlen(*found) + 1, sizeof(char));
-			strcpy(grep->logfile_exp_list[grep->exp_cnt], *found);
+			/* if buffer size too small should fail */
+			check_mem(strcpy(grep->logfile_exp_list[grep->exp_cnt], *found));
 			grep->exp_cnt++;
 			found++;
 		}
